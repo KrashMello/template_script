@@ -1,0 +1,55 @@
+#!/bin/bash
+to_upper_camel_case() {
+  local input="$1"
+  # Convertir cada palabra a capitalizada y unirlas
+  echo "$input" |
+    awk '{ for(i=1; i<=NF; i++) { $i = toupper(substr($i, 1, 1)) tolower(substr($i, 2)); } print }' |
+    tr -d ' '
+}
+to_kebab_case() {
+
+  local input_string="$1"
+  echo "$input_string" | tr '[:upper:]' '[:lower:]' | tr ' ' '-'
+
+}
+
+className=$(to_upper_camel_case "$1")
+fileName=$(to_kebab_case "$1")
+echo "$className"
+echo "$fileName"
+
+mkdir -p ./$fileName
+mkdir -p ./$fileName/dto
+mkdir -p ./$fileName/entities
+
+cat $HOME/pruebas/template/service.ts |
+  sed "s/<className>/$className/g" |
+  sed "s/<fileName>/$fileName/g" >./$fileName/$fileName.service.ts
+
+cat $HOME/pruebas/template/module.ts |
+  sed "s/<className>/$className/g" |
+  sed "s/<fileName>/$fileName/g" >./$fileName/$fileName.module.ts
+
+cat $HOME/pruebas/template/controller.ts |
+  sed "s/<className>/$className/g" |
+  sed "s/<fileName>/$fileName/g" >./$fileName/$fileName.controller.ts
+
+cat $HOME/pruebas/template/dto/create.ts |
+  sed "s/<className>/$className/g" |
+  sed "s/<fileName>/$fileName/g" >./$fileName/dto/create-$fileName.dto.ts
+
+cat $HOME/pruebas/template/dto/update.ts |
+  sed "s/<className>/$className/g" |
+  sed "s/<fileName>/$fileName/g" >./$fileName/dto/update-$fileName.dto.ts
+
+cat $HOME/pruebas/template/dto/param.ts |
+  sed "s/<className>/$className/g" |
+  sed "s/<fileName>/$fileName/g" >./$fileName/dto/param-$fileName.dto.ts
+
+cat $HOME/pruebas/template/dto/filter.ts |
+  sed "s/<className>/$className/g" |
+  sed "s/<fileName>/$fileName/g" >./$fileName/dto/filter-$fileName.dto.ts
+
+cat $HOME/pruebas/template/entities/entity.ts |
+  sed "s/<className>/$className/g" |
+  sed "s/<fileName>/$fileName/g" >./$fileName/entities/$fileName.entity.ts
