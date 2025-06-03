@@ -22,34 +22,34 @@ mkdir -p ./$fileName
 mkdir -p ./$fileName/dto
 mkdir -p ./$fileName/entities
 
-cat $HOME/pruebas/template/service.ts |
+cat "$(pwd)/template/service.ts" |
   sed "s/<className>/$className/g" |
   sed "s/<fileName>/$fileName/g" >./$fileName/$fileName.service.ts
 
-cat $HOME/pruebas/template/module.ts |
+cat "$(pwd)/template/module.ts" |
   sed "s/<className>/$className/g" |
   sed "s/<fileName>/$fileName/g" >./$fileName/$fileName.module.ts
 
-cat $HOME/pruebas/template/controller.ts |
+cat "$(pwd)/template/controller.ts" |
   sed "s/<className>/$className/g" |
   sed "s/<fileName>/$fileName/g" >./$fileName/$fileName.controller.ts
 
-cat $HOME/pruebas/template/dto/create.ts |
+cat "$(pwd)/template/dto/create.ts" |
   sed "s/<className>/$className/g" |
   sed "s/<fileName>/$fileName/g" >./$fileName/dto/create-$fileName.dto.ts
 
-cat $HOME/pruebas/template/dto/update.ts |
+cat "$(pwd)/template/dto/update.ts" |
   sed "s/<className>/$className/g" |
   sed "s/<fileName>/$fileName/g" >./$fileName/dto/update-$fileName.dto.ts
 
-cat $HOME/pruebas/template/dto/param.ts |
+cat "$(pwd)/template/dto/param.ts" |
   sed "s/<className>/$className/g" |
   sed "s/<fileName>/$fileName/g" >./$fileName/dto/param-$fileName.dto.ts
 
-cat $HOME/pruebas/template/dto/filter.ts |
+cat "$(pwd)/template/dto/filter.ts" |
   sed "s/<className>/$className/g" |
   sed "s/<fileName>/$fileName/g" >./$fileName/dto/filter-$fileName.dto.ts
 
-cat $HOME/pruebas/template/entities/entity.ts |
+cat "$(pwd)/template/entities/entity.ts" |
   sed "s/<className>/$className/g" |
   sed "s/<fileName>/$fileName/g" >./$fileName/entities/$fileName.entity.ts
